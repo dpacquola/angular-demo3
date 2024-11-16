@@ -1,17 +1,59 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {Component, inject} from '@angular/core';
+import {NavbarComponent} from './core/components/navbar.component';
+import {NavigationEnd, Router, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [
+    NavbarComponent,
+    RouterOutlet
+  ],
   template: `
-    <h1>Welcome to {{title}}!</h1>
 
-    <router-outlet />
+    <app-navbar />
+
+    <div class="max-w-screen-lg mx-3 lg:mx-auto">
+      <router-outlet />
+    </div>
   `,
-  styles: [],
 })
+
+
 export class AppComponent {
-  title = 'angular-demo3';
+
+  //Tecniche per iniettare un servizio!!!
+  /*
+  PRIMA TECNICA
+
+  constructor(router: Router) {
+
+
+   // //al caricamento della pagina dopo 4 secondi salto alla demo1
+   // setTimeout(()=> {
+   //   router.navigateByUrl('demo1')
+   // },4000)
+
+
+    //resto in ascolto degli eventi del router
+    router. events.subscribe(event => {
+    //console.log(event) //questo scrive però su tutti i tipi di eventi
+    if(event instanceof NavigationEnd) {
+      console.log(event.url)
+    }
+  })
+ */
+
+
+  //SECONDA TECNICA
+  router = inject(Router)
+
+  constructor() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        console.log('Usando inject: ' + event.url)
+      }
+    });
+  }
+
 }
