@@ -1,0 +1,1 @@
+import{Ba as m,Da as s,R as o,ua as n,va as a}from"./chunk-WUHKH4HT.js";var p=class e{static \u0275fac=function(t){return new(t||e)};static \u0275cmp=o({type:e,selectors:[["app-demo2"]],standalone:!0,features:[s],decls:2,vars:0,template:function(t,c){t&1&&(n(0,"p"),m(1," demo2 works! "),a())}})},r=class{};export{p as Demo2Component,r as Foo};
